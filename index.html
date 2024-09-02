@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rashu's Mood</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background-color: rgb(57, 101, 137);
+            background-image: url('pink-hearts.jpg');
+            background-size: 50px 50px; /* Adjust size as needed */
+            background-repeat: repeat;
+        }
+        .fixed-image {
+            position: fixed;
+            bottom: 100px;
+            left: 45%;
+            width: 15%;
+            height: auto;
+        }
+        .movable-image {
+            position: absolute;
+            bottom: 200px; /* Initial position above the fixed image */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: bottom 0.3s;
+        }
+        .text {
+            margin: 20px 0;
+            font-size: 60px; /* Increased font size */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: black; /* Changed to black */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        }
+        .button-container {
+            position: absolute;
+            bottom: 100px;
+            width: 100%;
+            text-align: center;
+        }
+        .button {
+            padding: 10px 20px;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .little-lovies {
+            background-color: green;
+        }
+        .angry {
+            background-color: red;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .fixed-image {
+                width: 25%; /* Increase image size for smaller screens */
+                left: 37.5%; /* Adjust position */
+                bottom: 100px; /* Adjust bottom spacing */
+            }
+            .movable-image {
+                bottom: 200px; /* Adjust initial position */
+            }
+            .text {
+                font-size: 40px; /* Reduce font size for smaller screens */
+            }
+            .button {
+                font-size: 14px; /* Adjust button font size */
+                padding: 8px 16px; /* Adjust button padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .fixed-image {
+                width: 35%; /* Further increase image size for very small screens */
+                left: 32.5%; /* Adjust position */
+                bottom: 60px; /* Adjust bottom spacing */
+            }
+            .movable-image {
+                bottom: 150px; /* Adjust initial position */
+            }
+            .text {
+                font-size: 30px; /* Further reduce font size */
+            }
+            .button {
+                font-size: 12px; /* Further adjust button font size */
+                padding: 6px 12px; /* Adjust button padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="fixed-image-url.png" alt="Fixed Image" class="fixed-image">
+    <img src="movable-image-url.png" alt="Movable Image" class="movable-image" id="movableImage">
+    <div class="text">How is Rashu feeling</div>
+    <div class="button-container">
+        <button class="button little-lovies" onclick="moveImage(-10)">Little Lovies</button>
+        <button class="button angry" onclick="moveImage(10)">Angry</button>
+    </div>
+
+    <script>
+        const movableImage = document.getElementById('movableImage');
+        const fixedImageHeight = document.querySelector('.fixed-image').clientHeight;
+
+        function moveImage(distance) {
+            let currentBottom = parseInt(window.getComputedStyle(movableImage).bottom, 10);
+            let newBottom = currentBottom + distance;
+
+            if (newBottom < fixedImageHeight) {
+                newBottom = fixedImageHeight; // Prevent image from going below the fixed image
+            }
+
+            movableImage.style.bottom = newBottom + 'px';
+        }
+    </script>
+</body>
+</html>
